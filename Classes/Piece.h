@@ -31,11 +31,14 @@
 -(bool) moveAllowed: (int) new_x : (int) new_y;
 -(bool) moveTo:      (int) new_x : (int) new_y;
 -(void) forceMoveTo: (int) new_x : (int) new_y;
+-(void) forceJumpTo:  (float) new_x : (float) new_y;
 -(bool) isMoveAttack:(int) new_x : (int) new_y;
 -(void) attachToBoard: (Board *) newBoard;
 -(void) removeFromBoard;
 -(void) setColor: (int) r : (int) g : (int) b;
 -(CGPoint) convertPoint: (int) new_x : (int) new_y;
+-(void)selected;
+-(void)deseledted;
 @property (nonatomic, retain) NSString *team;
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSDictionary *names;

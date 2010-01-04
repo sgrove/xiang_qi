@@ -49,6 +49,7 @@
 
 - (CGPoint) convertPointToBoard: (int) x andY: (int) y
 {
+	NSLog(@"Converting (%d, %d) to board coord", x, y);
 	x -= 32;
 	y -= 40;
 	

@@ -93,6 +93,85 @@
 	return self;
 }
 
+- (BOOL)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	UITouch *touch = [touches anyObject];
+	
+	if( touch ) {
+		NSLog(@"Touch began!");
+		
+		CGPoint location = [touch locationInView: [touch view]];
+		
+		// IMPORTANT:
+		// The touches are always in "portrait" coordinates. You need to convert them to your current orientation
+		CGPoint convertedPoint = [[Director sharedDirector] convertToGL:location];
+		//NSLog(@"Original:  %@", NSStringFromCGPoint(location));
+		NSLog(@"Converted: %@", NSStringFromCGPoint(convertedPoint));
+		NSLog(@"----> %f, %f", convertedPoint.x, convertedPoint.y);
+		
+		CGPoint newPoint = [[self board] convertPointToBoard: convertedPoint.x andY: convertedPoint.y];
+		int converted_x = newPoint.x;
+		int converted_y = newPoint.y;
+		
+		NSLog(@"Board: (%d, %d)", converted_x, converted_y);
+		
+		if ( pieceSelected )
+		{
+			NSLog(@"Something wierd... piece shouldn't be selected right now");
+			pieceSelected = FALSE;
+			self.selectedPiece = NULL;
+		} 
+		else if ( self.selectedPiece = [[self board] getUnitAtPoint:converted_x andY:converted_y] )
+		{
+			if (self.selectedPiece.team == currentTeam) {
+				NSLog(@"Piece selected: %@ on team: %@", self.selectedPiece.name, self.selectedPiece.team);
+				[self.selectedPiece selected];
+				pieceSelected = TRUE;
+			} else {
+				NSLog(@"It is %@ team's turn right now", currentTeam);
+			}
+		}
+		
+
+		
+		// no other handlers will receive this event
+		return kEventHandled;
+	}
+	
+	// we ignore the event. Other receivers will receive this event.
+	return kEventIgnored;		
+}
+
+- (BOOL)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	UITouch *touch = [touches anyObject];
+	
+	if( touch ) {
+		NSLog(@"Touch Moved!");
+		CGPoint location = [touch locationInView: [touch view]];
+		
+		// IMPORTANT:
+		// The touches are always in "portrait" coordinates. You need to convert them to your current orientation
+		CGPoint convertedPoint = [[Director sharedDirector] convertToGL:location];
+		//NSLog(@"Original:  %@", NSStringFromCGPoint(location));
+		NSLog(@"Converted: %@", NSStringFromCGPoint(convertedPoint));
+		NSLog(@"---> %f, %f", convertedPoint.x, convertedPoint.y);
+
+		if ( pieceSelected )
+		{
+			NSLog(@"Forcing piece to jump to: %f, %f", convertedPoint.x, convertedPoint.y);
+			[self.selectedPiece forceJumpTo:convertedPoint.x :convertedPoint.y];
+		}
+		
+		// no other handlers will receive this event
+		return kEventHandled;
+	}
+	
+	// we ignore the event. Other receivers will receive this event.
+	return kEventIgnored;		
+}
+
+
 - (BOOL)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	UITouch *touch = [touches anyObject];
@@ -117,8 +196,10 @@
 		{
 			NSLog(@"Should move %@ piece to %d, %d", selectedPiece.name, converted_x, converted_y);
 			bool moveOk = [self.selectedPiece moveTo:converted_x :converted_y];
+			[self.selectedPiece deselected];
 			if ( !moveOk ) {
 				NSLog(@"Not allowed to move %@ to %d, %d - deselecting", selectedPiece.name, converted_x, converted_y);
+				[self.selectedPiece forceMoveTo:self.selectedPiece.x :self.selectedPiece.y];
 			} else {
 				if (currentTeam == @"red") { currentTeam = @"black"; } else { currentTeam = @"red"; }
 				NSLog(@"Now %@ team's turn", currentTeam);
@@ -126,15 +207,18 @@
 			pieceSelected = FALSE;
 			self.selectedPiece = NULL;
 		} 
+/*		
 		else if ( self.selectedPiece = [[self board] getUnitAtPoint:converted_x andY:converted_y] )
 		{
 			if (self.selectedPiece.team == currentTeam) {
 				NSLog(@"Piece selected: %@ on team: %@", self.selectedPiece.name, self.selectedPiece.team);
+				[self.selectedPiece selected];
 				pieceSelected = TRUE;
 			} else {
 				NSLog(@"It is %@ team's turn right now", currentTeam);
 			}
 		}
+ */
 		
 		// no other handlers will receive this event
 		return kEventHandled;

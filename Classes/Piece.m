@@ -57,6 +57,19 @@
 	[[[self sprite] parent] removeChild:sprite cleanup:false];
 }
 
+// Note: This is not in board units, it's in pixels
+-(void) forceJumpTo: (float)new_x : (float)new_y
+{	
+	NSLog(@"Told to jump to (%f, %f)", new_x, new_y );
+	
+	CGPoint destination;
+	destination.x = new_x;
+	destination.y = new_y;
+	
+	NSLog(@"Moving piece (graphically) to (%f, %f)", destination.x, destination.y );
+	[self.sprite runAction: [MoveTo actionWithDuration:0.0f position:destination]];
+}
+
 -(void) forceMoveTo: (int)new_x : (int)new_y
 {
 		x = new_x;
@@ -144,6 +157,25 @@
 	if (new_y > 4) { board_y -= 15; }
 	
 	return ccp(board_x, board_y);
+}
+
+-(void) selected
+{
+	Action *scaler =  [ScaleTo actionWithDuration:0.25f scale:2.0f];
+	Action *opacity = [FadeTo actionWithDuration:0.25f opacity:125];
+	Action *runner = [Spawn actions:scaler, opacity, nil];
+	
+	[sprite runAction:runner];
+}
+
+-(void) deselected
+{
+	if (self == NULL) { return; }
+	Action *scaler =  [ScaleTo actionWithDuration:0.25f scale:1.0f];
+	Action *opacity = [FadeTo actionWithDuration:0.25f opacity:255];
+	Action *runner = [Spawn actions:scaler, opacity, nil];
+	
+	[sprite runAction:runner];
 }
 
 @synthesize x;

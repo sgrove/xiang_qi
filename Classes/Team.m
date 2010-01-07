@@ -1,6 +1,6 @@
 //
 //  Team.m
-//  ___PROJECTNAME___
+//  FCGXiangQi
 //
 //  Created by Sean Grove on 1/3/10.
 //  Copyright 2010 Chuwe. All rights reserved.
@@ -67,7 +67,7 @@
 	// Hackish, but a nice quick one
 	for (Piece *piece in pieces)
 	{
-		[piece removeFromBoard];
+		[piece removeFromBoard: true];
 	}
 }
 

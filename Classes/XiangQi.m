@@ -1,6 +1,9 @@
 //
-// cocos2d Hello World example
-// http://www.cocos2d-iphone.org
+//  XiangQi.m
+//  FCGXiangQi
+//
+//  Created by Sean Grove on 1/3/10.
+//  Copyright 2010 Chuwe. All rights reserved.
 //
 
 // Import the interfaces
@@ -15,7 +18,7 @@
 #import "Pao.h"
 #import "Zu.h"
 
-// HelloWorld implementation
+// XiangQi implementation
 @implementation XiangQi
 
 +(id) scene
@@ -83,7 +86,10 @@
 		[black_team addPiece:[[Zu alloc]    initWithPosition:4 andY:3 onTeam:@"black"]];
 		[black_team addPiece:[[Zu alloc]    initWithPosition:6 andY:3 onTeam:@"black"]];
 		[black_team addPiece:[[Zu alloc]    initWithPosition:8 andY:3 onTeam:@"black"]];
-		
+
+		// For debugging game ending
+		[red_team addPiece:[[Pao alloc]		initWithPosition:4 andY:4 onTeam:@"red"]];
+
 		team_1 = red_team;
 		team_2 = black_team;
 		

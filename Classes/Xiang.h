@@ -1,6 +1,6 @@
 //
 //  Xiang.h
-//  ___PROJECTNAME___
+//  FCGXiangQi
 //
 //  Created by Sean Grove on 1/3/10.
 //  Copyright 2010 Chuwe. All rights reserved.

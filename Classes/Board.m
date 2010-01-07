@@ -1,6 +1,6 @@
 //
 //  Board.m
-//  ___PROJECTNAME___
+//  FCGXiangQi
 //
 //  Created by Sean Grove on 1/3/10.
 //  Copyright 2010 Chuwe. All rights reserved.
@@ -62,13 +62,14 @@
 
 -(void) gameOver
 {
+	[[SimpleAudioEngine sharedEngine] playBackgroundMusic:@"charlotte.mp3"];
 	[team_1 removeAllFromBoard];
 	[team_2 removeAllFromBoard];
 	
 	Label *endLabel = [Label labelWithString:@"游戏结束" fontName:@"Marker Felt" fontSize:60];
 	endLabel.color = ccc3(255, 255, 255);
 	[board addChild:endLabel];
-	endLabel.position = ccp(150, 240); // Adjust label within piece space		
+	endLabel.position = ccp(160, 240); // Adjust label within piece space		
 }
 
 @synthesize board;

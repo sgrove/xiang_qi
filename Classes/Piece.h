@@ -1,11 +1,18 @@
 //
 //  piece.h
-//  ___PROJECTNAME___
+//  FCGXiangQi
 //
 //  Created by Sean Grove on 1/2/10.
 //  Copyright 2010 Chuwe. All rights reserved.
 //
 #import "cocos2d.h"
+#import "SimpleAudioEngine.h"
+
+/*
+ #import "CocosDenshion.*"
+ #import "CDAudioManager.*"
+ */
+//#import "CDOpenALSupport.h"
 
 @class Team;
 @class Board;

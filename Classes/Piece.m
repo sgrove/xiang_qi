@@ -1,13 +1,12 @@
 //
 //  piece.m
-//  ___PROJECTNAME___
+//  FCGXiangQi
 //
 //  Created by Sean Grove on 1/2/10.
 //  Copyright 2010 Chuwe. All rights reserved.
 //
 
 #import "piece.h"
-
 
 @implementation Piece
 -(id) init
@@ -54,7 +53,15 @@
 
 -(void) removeFromBoard
 {
+	[[SimpleAudioEngine sharedEngine] playEffect:@"hammer_stone_3.wav"]; //play a sound
 	[[[self sprite] parent] removeChild:sprite cleanup:false];
+	sprite = NULL;
+}
+
+-(void) removeFromBoard: (BOOL) silently
+{
+	[[[self sprite] parent] removeChild:sprite cleanup:false];
+	sprite = NULL;
 }
 
 // Note: This is not in board units, it's in pixels
@@ -165,6 +172,7 @@
 	Action *opacity = [FadeTo actionWithDuration:0.25f opacity:125];
 	Action *runner = [Spawn actions:scaler, opacity, nil];
 	
+	[[SimpleAudioEngine sharedEngine] playEffect:@"concrete_stone_dragging_smooth_6.wav"]; // play a sound
 	[sprite runAction:runner];
 }
 
@@ -175,7 +183,7 @@
 	Action *opacity = [FadeTo actionWithDuration:0.25f opacity:255];
 	Action *runner = [Spawn actions:scaler, opacity, nil];
 	
-	[sprite runAction:runner];
+	if ( self.sprite != NULL ) { [sprite runAction:runner]; }
 }
 
 @synthesize x;

@@ -1,3 +1,10 @@
+//
+//  XiangQi.h
+//  FCGXiangQi
+//
+//  Created by Sean Grove on 1/3/10.
+//  Copyright 2010 Chuwe. All rights reserved.
+//
 
 // When you import this file, you import all the cocos2d classes
 #import "cocos2d.h"
@@ -5,7 +12,7 @@
 #import "Piece.h"
 #import "Board.h"
 
-// HelloWorld Layer
+// XiangQi Interface
 @interface XiangQi : Layer
 {
 	Board *board;

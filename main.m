@@ -1,16 +1,16 @@
 //
 //  main.m
-//  ___PROJECTNAME___
+//  FCGXiangQi
 //
-//  Created by ___FULLUSERNAME___ on ___DATE___.
-//  Copyright ___ORGANIZATIONNAME___ ___YEAR___. All rights reserved.
+//  Created by Sean Grove on 2010-01-04.
+//  Copyright Fake Cool Guys 2010. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 int main(int argc, char *argv[]) {
 	NSAutoreleasePool *pool = [NSAutoreleasePool new];
-	int retVal = UIApplicationMain(argc, argv, nil, @"___PROJECTNAMEASIDENTIFIER___AppDelegate");
+	int retVal = UIApplicationMain(argc, argv, nil, @"fcgxiangqi_AppDelegate");
 	[pool release];
 	return retVal;
 }

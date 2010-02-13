@@ -110,7 +110,7 @@ enum {
 		[blackTeam addPiece:[[Zu alloc]    initWithPosition:8 andY:3 onTeam:@"black"]];
 
 		// For debugging game ending
-		[blackTeam addPiece:[[Pao alloc]	initWithPosition:4 andY:4 onTeam:@"red"]];
+		//[blackTeam addPiece:[[Pao alloc]	initWithPosition:4 andY:4 onTeam:@"red"]];
 		
 		[redTeam   autorelease];
 		[blackTeam autorelease];
@@ -134,7 +134,7 @@ enum {
 
 - (BOOL)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	if ( movementMethod = @"tap" ) { return kEventIgnored; }
+	if ( movementMethod == @"tap" ) { return kEventIgnored; }
 	
 	UITouch *touch = [touches anyObject];
 	

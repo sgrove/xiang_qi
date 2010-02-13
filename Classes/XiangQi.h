@@ -11,6 +11,7 @@
 #import "Team.h"
 #import "Piece.h"
 #import "Board.h"
+#import "DebugGraphic.h"
 
 // XiangQi Interface
 @interface XiangQi : Layer
@@ -18,17 +19,24 @@
 	Board *board;
 	
 	// Initialize teams
-	Team *team_1;
-	Team *team_2;
-	bool pieceSelected;
+	BOOL isPieceSelected;
 	NSArray *teams;
 	
 	Piece *selectedPiece;
 	NSString *currentTeam;
+	NSString *movementMethod;
+	
+	DebugGraphic *debugGraphic;
 }
 
 
 +(id) scene;
-@property (nonatomic, retain) Board *board;
-@property (nonatomic, retain) Piece *selectedPiece;
+-(void) toggleTeam;
+-(CGPoint) convertToBoard: (CGPoint) screenPoint;
+-(BOOL) rectContainsPoint: (CGRect) containerRect point: (CGPoint) point;
+@property (nonatomic, assign) Board *board;
+@property (nonatomic, assign) Piece *selectedPiece;
+@property (nonatomic, assign) BOOL isPieceSelected;
+@property (nonatomic, assign) NSString *movementMethod;
+@property (nonatomic, assign) DebugGraphic *debugGraphic;
 @end

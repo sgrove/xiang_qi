@@ -22,9 +22,9 @@
 	return self;
 }
 
--(bool) moveAllowed: (int) new_x : (int) new_y
+-(BOOL) isMoveAllowed: (int) new_x : (int) new_y
 {
-	if ( ![super moveAllowed:new_x :new_y] ) {return false;}
+	if ( ![super isMoveAllowed:new_x :new_y] ) {return false;}
 	
 	// TODO: Make it DRY. Not in the mood right now.
 	// -- Probably means I should take a break. But not yet.
@@ -40,23 +40,23 @@
 			NSLog(@"Move-y from %d to %d", y, new_y);
 			for (int i = y + 1; i < new_y; i++) {
 				NSLog(@"Checking for piece at %d, %d", new_x, i);
-			Piece *unit = [board getUnitAtPoint:new_x andY:i];
+			Piece *unit = [[team board] getUnitAtPoint:new_x andY:i];
 				if ( unit != NULL) { NSLog(@"Found piece %@ at %d %d", unit.name, new_x, i); return FALSE; }
 			}
 		} else {
 			NSLog(@"Move down");
 			// down
-			for (int i = y - 1; i > new_y; i--) { Piece *unit = [board getUnitAtPoint:new_x andY:i]; if ( unit != NULL) { return FALSE; } }
+			for (int i = y - 1; i > new_y; i--) { Piece *unit = [[team board] getUnitAtPoint:new_x andY:i]; if ( unit != NULL) { return FALSE; } }
 		}
 	} else if (new_y == y) {
 		NSLog(@"Horizontal move");
 		// horizontal
 		if (new_x > x) {
 			// right
-			for (int i = x + 1; i < new_x; i++) { Piece *unit = [board getUnitAtPoint:i andY:new_y]; if ( unit != NULL) { return FALSE; } }
+			for (int i = x + 1; i < new_x; i++) { Piece *unit = [[team board] getUnitAtPoint:i andY:new_y]; if ( unit != NULL) { return FALSE; } }
 		} else {
 			// left
-			for (int i = x - 1; i > new_x; i--) { Piece *unit = [board getUnitAtPoint:i andY:new_y]; if ( unit != NULL) { return FALSE; } }
+			for (int i = x - 1; i > new_x; i--) { Piece *unit = [[team board] getUnitAtPoint:i andY:new_y]; if ( unit != NULL) { return FALSE; } }
 		}		
 	} else {
 		return false;

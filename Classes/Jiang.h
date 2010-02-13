@@ -11,6 +11,6 @@
 
 @interface Jiang : Piece {
 }
--(bool) moveAllowed: (int) new_x : (int) new_y;
+-(BOOL) isMoveAllowed: (int) new_x : (int) new_y;
 -(id) initWithPosition: (int) init_x andY: (int) init_y onTeam: (NSString *) ownerTeam;
 @end

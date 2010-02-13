@@ -22,9 +22,9 @@
 	return self;
 }
 
--(bool) moveAllowed: (int) new_x : (int) new_y
+-(BOOL) isMoveAllowed: (int) new_x : (int) new_y
 {
-	if ( ![super moveAllowed:new_x :new_y] ) {return false;}
+	if ( ![super isMoveAllowed:new_x :new_y] ) {return false;}
 	
 	// Can only move diagonally
 	if (((new_x != x + 1) && (new_x != x - 1)) ||

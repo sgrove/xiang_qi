@@ -12,15 +12,20 @@
 
 
 @interface Board : NSObject {
-	Sprite *board;
+	Sprite *sprite;
 	Team *team_1;
 	Team *team_2;
 }
--(id) getUnitAtPoint: (int) x andY: (int) y;
--(bool) killUnitAtPoint: (int) x andY: (int) y;
--(CGPoint) convertPointToBoard: (int) x andY: (int) y;
+-(id) getUnitAtPoint: (CGPoint) point;
+-(id) getUnitAtPoint:new_x andY:new_y;
+-(bool) killUnitAtPoint: (CGPoint) point;
+-(CGPoint) convertPointToBoard: (CGPoint) point;
 -(void) gameOver;
-@property (nonatomic, retain) Sprite *board;
+-(NSMutableArray *) getAllPieces;
+-(void) addPiece: (Piece *) piece;
+-(void) addPieceSprite: (Sprite *) pieceSprite;
+-(void) removePieceSprite: (Sprite *) pieceSprite;
+@property (nonatomic, retain) Sprite *sprite;
 @property (readwrite, retain) Team *team_1;
 @property (nonatomic, retain) Team *team_2;
 @end

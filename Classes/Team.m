@@ -11,89 +11,84 @@
 
 @implementation Team
 
--(id) initWithBoard: (Layer *) layer andName: (NSString *) name andPlayingBoard: (Board *) newPlayingBoard
-{
+-(void) addPiece: (Piece *) piece {
+	piece.team = self;
+
+	int r, g, b = 0;
+	if (name == @"red") { r = 255; }
+	[piece setColor:r :g :b];
+
+	[board addPiece:piece];
+	
+	[pieces addObject:piece];
+}
+
+-(void) dealloc {
+	[pieces release];
+	[super dealloc];
+}
+
+-(void) clearPieceGraphic: (Piece *) piece {
+	[board removePieceSprite:[piece sprite]];
+	[piece clearSprite];
+}
+
+-(id) initWithBoard: (Board *) initBoard andName: (NSString *) initName {
 	self = [super init];
 	
-	if (self)
-	{
-		self.playingBoard = newPlayingBoard;
-		self.board = layer;
-		self.name = name;
+	if (self) {
+		self.board = initBoard;
+		self.name = initName;
 		self.pieces = [[NSMutableArray alloc] init];
 	}
 	
 	return self;
 }
 
--(void) addPiece: (Piece *) piece
-{
-	int r = 0;
-	int g = 0;
-	int b = 0;
-	
-	if (name == @"red") {
-		r = 255;
+-(BOOL) removePiece: (Piece *) piece {
+	BOOL lost = false;
+	if ( piece.vital ) { lost = true; }
+
+	[self clearPieceGraphic:piece];
+
+	[pieces removeObject:piece];
+	if ( lost ) {
+		NSLog(@"Game over, %@ team is dead", name);
+		[board gameOver];
+		return true;
 	}
 	
-	[board addChild:[piece sprite]];
-	
-	piece.realTeam = self;
-	[piece attachToBoard:playingBoard];
-	[piece setColor:r :g :b];
-	[pieces addObject:piece];
+	NSLog(@"%@ team is wounded, but not dead", name);
+	return false;
 }
 
--(bool) removePiece: (Piece *) piece
-{
-	bool lost = false;
+-(BOOL) removePieceAudibly: (Piece *) piece {
+	BOOL lost = false;
 	if ( piece.vital ) { lost = true; }
 	
-	[piece removeFromBoard];
+	[self clearPieceGraphic:piece];
+	[piece soundDeathKnell];
+	
 	[pieces removeObject:piece];
-	if ( lost )
-	{
+	if ( lost ) {
 		NSLog(@"Game over, %@ team is dead", name);
-		[playingBoard gameOver];
+		[board gameOver];
 		return true;
-	} else {
-		NSLog(@"%@ team is wounded, but not dead", name);
-		return false;
-	}
-}
-
--(void) removeAllFromBoard
-{
-	// Hackish, but a nice quick one
-	for (Piece *piece in pieces)
-	{
-		[piece removeFromBoard: true];
-	}
-}
-
--(bool) lost
-{
-	// Hackish, but a nice quick one
-	for (Piece *piece in pieces)
-	{
-		NSLog(@"%@:(%@)", name, piece.name);
-		if (piece.name == @"帥") { NSLog(@"This is 帥"); }
-		if (name == @"red") {
-			NSLog(@"This is the red team!");
-		if (piece.name == @"帥") { NSLog(@"This is 帥"); return false; } }
-		if (name == @"black" && piece.name == @"將") { return false; }
 	}
 	
-	// If there is no general, this side lost.
-	return true;
+	NSLog(@"%@ team is wounded, but not dead", name);
+	return false;
 }
 
--(id) unitAt: (int) x andY: (int) y
-{
-	for (Piece *piece in pieces)
-	{
-		if (piece.x == x && piece.y == y)
-		{
+-(void) removeTeamFromBoard {
+	for (Piece *piece in pieces) {
+		[self clearPieceGraphic:piece];
+	}
+}
+
+-(id) unitAt: (int) x andY: (int) y {
+	for (Piece *piece in pieces) {
+		if (piece.x == x && piece.y == y) {
 			return piece;
 		}
 	}
@@ -101,7 +96,6 @@
 	return NULL;
 }
 
-@synthesize playingBoard;
 @synthesize board;
 @synthesize name;
 @synthesize pieces;

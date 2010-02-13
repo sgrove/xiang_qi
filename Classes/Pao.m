@@ -22,9 +22,9 @@
 	return self;
 }
 
--(bool) moveAllowed: (int) new_x : (int) new_y
+-(BOOL) isMoveAllowed: (int) new_x : (int) new_y
 {
-	if ( ![super moveAllowed:new_x :new_y] ) {return false;}
+	if ( ![super isMoveAllowed:new_x :new_y] ) {return false;}
 	
 	int count = 0;
 		// TODO: Make it DRY. Not in the mood right now.
@@ -41,23 +41,23 @@
 				NSLog(@"Move-y from %d to %d", y, new_y);
 				for (int i = y + 1; i < new_y; i++) {
 					NSLog(@"Checking for piece at %d, %d", new_x, i);
-					Piece *unit = [board getUnitAtPoint:new_x andY:i];
+					Piece *unit = [[team board] getUnitAtPoint:new_x andY:i];
 					if ( unit != NULL) { NSLog(@"Found piece %@ at %d %d", unit.name, new_x, i); count += 1; }
 				}
 			} else {
 				NSLog(@"Move down");
 				// down
-				for (int i = y - 1; i > new_y; i--) { Piece *unit = [board getUnitAtPoint:new_x andY:i]; if ( unit != NULL) { count += 1; } }
+				for (int i = y - 1; i > new_y; i--) { Piece *unit = [[team board] getUnitAtPoint:new_x andY:i]; if ( unit != NULL) { count += 1; } }
 			}
 		} else if (new_y == y) {
 			NSLog(@"Horizontal move");
 			// horizontal
 			if (new_x > x) {
 				// right
-				for (int i = x + 1; i < new_x; i++) { Piece *unit = [board getUnitAtPoint:i andY:new_y]; if ( unit != NULL) { count += 1; } }
+				for (int i = x + 1; i < new_x; i++) { Piece *unit = [[team board] getUnitAtPoint:i andY:new_y]; if ( unit != NULL) { count += 1; } }
 			} else {
 				// left
-				for (int i = x - 1; i > new_x; i--) { Piece *unit = [board getUnitAtPoint:i andY:new_y]; if ( unit != NULL) { count += 1; } }
+				for (int i = x - 1; i > new_x; i--) { Piece *unit = [[team board] getUnitAtPoint:i andY:new_y]; if ( unit != NULL) { count += 1; } }
 			}		
 		} else {
 			return false;
@@ -66,7 +66,7 @@
 	// Movement of Pao depends on if its an attack or not
 	// We already checked for friendly units, so if there's
 	// a unit here, it's an attack.
-	Piece *unit = [board getUnitAtPoint:new_x andY:new_y];
+	Piece *unit = [[team board] getUnitAtPoint:new_x andY:new_y];
 	if ( unit != NULL)
 	{
 		NSLog(@"This is an attempted attack by %@ on %@", self.name, unit.name);

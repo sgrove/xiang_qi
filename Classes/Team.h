@@ -11,20 +11,17 @@
 @class Board;
 
 @interface Team : NSObject {
+	Board *board;
 	NSString *name;
 	NSMutableArray *pieces;
-	Layer *board;
-	Board *playingBoard;
 }
 
--(id) initWithBoard: (Layer *) layer andName: (NSString *) name andPlayingBoard: (Board *) newPlayingBoard;
 -(void) addPiece: (Piece *) piece;
--(bool) removePiece: (Piece *) piece;
+-(id) initWithBoard: (Board *) initBoard andName: (NSString *) initName;
+-(void) removeTeamFromBoard;
+-(BOOL) removePiece: (Piece *) piece;
 -(id) unitAt: (int) x andY: (int) y;
--(void) removeAllFromBoard;
--(bool) lost;
-@property (nonatomic, retain) Board *playingBoard;
-@property (nonatomic, retain) Layer *board;
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSMutableArray *pieces;
+@property (nonatomic, assign) Board *board;
+@property (nonatomic, assign) NSString *name;
+@property (nonatomic, assign) NSMutableArray *pieces;
 @end

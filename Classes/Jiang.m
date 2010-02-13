@@ -23,11 +23,9 @@
 	return self;
 }
 
--(bool) moveAllowed: (int) new_x : (int) new_y
+-(BOOL) isMoveAllowed: (int) new_x : (int) new_y
 {
-	if ( ![super moveAllowed:new_x :new_y] ) {return false;}
-
-	if ( ![super moveAllowed:new_x :new_y] ) {return false;}
+	if ( ![super isMoveAllowed:new_x :new_y] ) {return false;}
 	
 	// Can only be in the palace
 	if (self.team == @"red")

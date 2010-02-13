@@ -8,52 +8,53 @@
 #import "cocos2d.h"
 #import "SimpleAudioEngine.h"
 
-/*
- #import "CocosDenshion.*"
- #import "CDAudioManager.*"
- */
-//#import "CDOpenALSupport.h"
-
+// Forward declartion:
+//  Basically, promise to Xcode that these classes will
+//  be declared sometime in the future
 @class Team;
 @class Board;
+@class DebugGraphic;
 
-@interface Piece : NSObject {
-	int x;
-	int y;
+@interface Piece : NSObject <NSCoding> {
+	int x, y;
 	
-	NSString *team;
+	NSString *teamName;
 	NSString *name;
 	NSDictionary *names;
 	
 	bool vital;
-	
+
 	Label *label;
 	Sprite *sprite;
-	Team *realTeam;
-	Board *board;
+
+	Team *team;
+
+	DebugGraphic *debugGraphic;
 }
 
--(id) initWithPosition: (int) x andY: (int) y;
--(id) initWithPosition: (int) x andY: (int) y andKillSwitch: (bool) killSwitch;
--(bool) moveAllowed: (int) new_x : (int) new_y;
--(bool) moveTo:      (int) new_x : (int) new_y;
+-(void) attachToBoard: (Board *) newBoard;
+-(void) clearSprite;
+-(CGPoint) convertPoint: (int) new_x : (int) new_y;
 -(void) forceMoveTo: (int) new_x : (int) new_y;
 -(void) forceJumpTo:  (float) new_x : (float) new_y;
--(bool) isMoveAttack:(int) new_x : (int) new_y;
--(void) attachToBoard: (Board *) newBoard;
+-(id) initWithPosition: (int) x andY: (int) y;
+-(id) initWithPosition: (int) x andY: (int) y andKillSwitch: (bool) killSwitch;
+-(BOOL) isMoveAttack:(int) new_x : (int) new_y;
+-(BOOL) isMoveAllowed: (int) new_x : (int) new_y;
+-(BOOL) moveTo:      (int) new_x : (int) new_y;
+-(BOOL) moveTo:      (CGPoint) destination;
 -(void) removeFromBoard;
 -(void) setColor: (int) r : (int) g : (int) b;
--(CGPoint) convertPoint: (int) new_x : (int) new_y;
--(void)selected;
--(void)deseledted;
-@property (nonatomic, retain) NSString *team;
+-(void) selected;
+-(void) deselected;
+-(CGPoint) position;
+@property (readonly) int x, y;
+@property (nonatomic, retain) NSString *teamName;
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSDictionary *names;
-@property (nonatomic, retain) Team *realTeam;
-@property (nonatomic, retain) Board *board;
+@property (nonatomic, retain) Team *team;
+@property (nonatomic, assign) DebugGraphic *debugGraphic;
 @property (readonly) Sprite *sprite;
 @property (readonly) Label *label;
-@property (readonly) int x;
-@property (readonly) int y;
 @property (readonly) bool vital;
 @end

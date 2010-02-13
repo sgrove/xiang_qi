@@ -17,7 +17,8 @@
 	glColor4ub(255, 0, 255, 255);
 	glLineWidth(2);
 	CGPoint vertices2[] = { point_1, point_2, point_3, point_4 };
-	drawPoly(vertices2, 4, YES);
+	// Uncomment the next line to draw squares around pieces for debugging purposes
+	//drawPoly(vertices2, 4, YES);
 }
 
 -(void) setVertices: (CGPoint) new_point_1 : (CGPoint) new_point_2 : (CGPoint) new_point_3 : (CGPoint) new_point_4 {

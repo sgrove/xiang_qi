@@ -200,6 +200,7 @@
 		79C910B210F0A219002146B8 /* Ju.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C910B110F0A219002146B8 /* Ju.m */; };
 		79C910C710F0A2AF002146B8 /* Pao.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C910C610F0A2AF002146B8 /* Pao.m */; };
 		79C910E710F0A3B0002146B8 /* Zu.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C910E610F0A3B0002146B8 /* Zu.m */; };
+		79C9504E1127D0C300DCDBAE /* DebugGraphic.m in Sources */ = {isa = PBXBuildFile; fileRef = 79C9504D1127D0C300DCDBAE /* DebugGraphic.m */; };
 		79D9D7D510F1689A00ED707A /* Board.m in Sources */ = {isa = PBXBuildFile; fileRef = 79D9D7D410F1689A00ED707A /* Board.m */; };
 		DC6640030F83B3EA000B3E49 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */; };
 		DC6640050F83B3EA000B3E49 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6640040F83B3EA000B3E49 /* OpenAL.framework */; };
@@ -422,6 +423,8 @@
 		79C910C610F0A2AF002146B8 /* Pao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pao.m; sourceTree = "<group>"; };
 		79C910E510F0A3B0002146B8 /* Zu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Zu.h; sourceTree = "<group>"; };
 		79C910E610F0A3B0002146B8 /* Zu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Zu.m; sourceTree = "<group>"; };
+		79C9504C1127D0C300DCDBAE /* DebugGraphic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugGraphic.h; sourceTree = "<group>"; };
+		79C9504D1127D0C300DCDBAE /* DebugGraphic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DebugGraphic.m; sourceTree = "<group>"; };
 		79D9D7D310F1689A00ED707A /* Board.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Board.h; sourceTree = "<group>"; };
 		79D9D7D410F1689A00ED707A /* Board.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Board.m; sourceTree = "<group>"; };
 		DC6640020F83B3EA000B3E49 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.2.sdk/System/Library/Frameworks/AudioToolbox.framework; sourceTree = DEVELOPER_DIR; };
@@ -518,6 +521,8 @@
 		2D500B1D0D5A766B00DBA0E3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				79C9504C1127D0C300DCDBAE /* DebugGraphic.h */,
+				79C9504D1127D0C300DCDBAE /* DebugGraphic.m */,
 				79C910E510F0A3B0002146B8 /* Zu.h */,
 				79C910E610F0A3B0002146B8 /* Zu.m */,
 				79C910C510F0A2AF002146B8 /* Pao.h */,
@@ -990,6 +995,7 @@
 				79C910C710F0A2AF002146B8 /* Pao.m in Sources */,
 				79C910E710F0A3B0002146B8 /* Zu.m in Sources */,
 				79D9D7D510F1689A00ED707A /* Board.m in Sources */,
+				79C9504E1127D0C300DCDBAE /* DebugGraphic.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
